@@ -45,12 +45,12 @@ exports.upload = function(options) {
     client.upload(file.contents, {key: slash(fileKey)}, function(err, result) {
       if (err) {
         log('Error', colors.red(new PluginError(PLUGIN_NAME, err).message));
+        callback(err);
       } else {
         log('Uploaded:', colors.green(result.url));
+        callback(null, file);
       }
     });
-
-    callback(null, file);
   });
 };
 
